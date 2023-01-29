@@ -1,6 +1,6 @@
 //The telephone class contains the following pattern: Constructor, Singleton, Observer and Prototype pattern
 class Telephone {
-    
+
     constructor() {
         if(Telephone.instance) {
             return Telephone.instance;
@@ -12,29 +12,58 @@ class Telephone {
     }
 
     addPhoneNumber(phoneNumber) {
-        this.contacts.add(phoneNumber);
+        if(this.contactExist(phoneNumber)) {
+            console.log("Contact already exist");
+        }else {
+            this.contacts.add(phoneNumber);
+        }
     }
 
     removePhoneNumber(phoneNumber) {
-        this.contacts.delete(phoneNumber);
+        if(this.contactExist(phoneNumber)) {
+            this.contacts.delete(phoneNumber);
+        }else {
+            console.log("Contact doesn't exist");
+        }
     }
 
     dialPhoneNumber(phoneNumber) {
-        this.notifyObserver(phoneNumber);
+        if(this.contactExist(phoneNumber)) {
+            this.notifyObserver(phoneNumber);
+        }else {
+            console.log("Contact doesn't exist");
+        }
     }
 
     addObserver(observer) {
-        this.observers.add(observer);
+        if(this.observerExist(observer)) {
+            console.log("Observer already exist");
+        }else {
+            this.observers.add(observer);
+        }
     }
 
     removeObserver(observer) {
-        this.observers.delete(observer);
+        if(this.observerExist(observer)) {
+            this.observers.delete(observer);
+        }else {
+            console.log("Observer doesn't exist");
+        }
     }
 
     notifyObserver(phoneNumber) {
         this.observers.forEach(observer => {
             observer.update(phoneNumber);
-            console.log("")});
+            console.log("");
+        });
+    }
+//Checks if the contact already exists
+    contactExist(phoneNumber) {
+        return this.contacts.has(phoneNumber);
+    }
+//Checks if the observer already exists
+    observerExist(observer) {
+        return this.observers.has(observer);
     }
 
 }
@@ -49,7 +78,7 @@ class Observer1 {
 //The second observer which prints "Now Dialling......2347023232"
 class Observer2 {
     update(phoneNumber) {
-        console.log(`Now Dialing......${phoneNumber.number}`)
+        console.log(`Now Dialing......${phoneNumber.number}`);
     }
 }
 
