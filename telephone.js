@@ -42,7 +42,7 @@ class Telephone {
 //The first observer which prints the phone number
 class Observer1 {
     update(phoneNumber) {
-        console.log(`Contact Details: Name: ${phoneNumber.fullName}\n\t\t\t\t\t\t\t\tNumber: ${phoneNumber.number}`)
+        console.log(`Contact Details: Name: ${phoneNumber.fullName}\n\t\tNumber: ${phoneNumber.number}`)
     }
 }
 
